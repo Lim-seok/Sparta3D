@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float movespeed;
     private Vector2 curMovementInput;
     public float jumpForce;
+    public LayerMask groundLayerMask;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float maxXLook;
     private float camCurXRot;
     public float lookSensitivity;
+
+    
 
     private Vector2 mouseDelta;
 
@@ -52,6 +55,26 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = dir;
 
     }
+    bool IsGrounded()
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.1f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.1f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.1f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.1f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.8f, groundLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -66,7 +89,10 @@ public class PlayerController : MonoBehaviour
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     public void OnLookInput(InputAction.CallbackContext context)
