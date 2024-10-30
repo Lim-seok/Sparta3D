@@ -1,21 +1,56 @@
 # 3D_Project
  ## 필수구현사항
- ### Unity
- - Input Action
-    - Move : w (&uarr;), a (&larr;), s(&darr;), d(&rarr;)
-    - Jump : Spacebar
-    - Look : Delta[Mouse]
- ### C# Scripts
- - CharacterManager.cs
-    - Monobehavuour 이해하기
-    - 싱글톤 패턴 이해하기
-        - CharacterManagerClass Instance 관리
-    - 프로퍼티 이해하기
-    - 역할 : 캐릭터 관리
- - PlayerController.cs
-    - OnLookInput, OnJumpInput, OnMoveInput, ToggleCursor
-        - InputAction.CallbackContext
-    - 책임 : InputActionSystem 
- - Player.cs
-    - private Awake()
-        - 유니티가 어떻게 인식 할 수 있는지(Reflection, Monobehavuour)
+   ### 기본이동 및 점프
+   - Input Action
+      - Move : w (&uarr;), a (&larr;), s(&darr;), d(&rarr;)
+      - Jump : Spacebar
+      - Look : Delta[Mouse]
+   ### 체력바 UI
+      - 문제발생
+      - 체력이 변할때 UI가 변경되지 않음
+ 
+   ### 동적 환경 조사
+      - 문제발생
+      - 3인칭시점인데 Ray가 카메라 중앙에서 나옴
+      - PromptText가 표시안됨
+   ### 점프대
+      - EnCollisionEnter을 사용해 구현
+
+   ### 아이템 데이터
+      - 구현
+
+   ### 아이템 사용
+      - 미구현
+
+ ## 도전기능 가이드
+ 
+   ### 추가UI
+      - 스태미나UI 구현
+      - 점프시 스태미나소모 미구현
+
+   ### 3인칭 시점
+      - 카메라 위치를 x : 0, y : 3, z : -7설정
+
+   ### 움직이는 플랫폼
+      - 미구현
+
+   ### 벽타기 및 매달리기
+      - 미구현
+
+   ### 다양한 아이템 구현
+      - 미구현
+
+   ### 장비장착
+      - 미구현
+
+   ### 레이저트랩
+      - 미구현
+
+   ### 상호작용가능한 오브젝트 표시
+      - 미구현
+
+   ### 플랫폼 발사기
+      - 미구현
+
+   ### 발전된 AI
+      - 미구현  
